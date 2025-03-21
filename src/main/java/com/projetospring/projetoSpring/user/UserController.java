@@ -21,11 +21,16 @@ public class UserController {
     private ResponseEntity criarUsuario(@RequestBody UserModel userModel, HttpServletRequest request){
         var usuarioExiste = this.userRepository.findByname(userModel.getName());
         if(usuarioExiste != null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Jogo já cadastrado no sistema");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já existe!");
         }else {
             var senhaHash = BCrypt.withDefaults()
                     .hashToString(12, userModel.getPassword().toCharArray());
             userModel.setPassword(senhaHash);
+
+            var emailHash = BCrypt.withDefaults()
+                    .hashToString(12, userModel.getEmail().toCharArray());
+            userModel.setEmail(emailHash);
+
             var criado = this.userRepository.save(userModel);
             return ResponseEntity.status(HttpStatus.CREATED).body(criado);
         }
