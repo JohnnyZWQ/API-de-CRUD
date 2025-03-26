@@ -1,5 +1,6 @@
 package com.projetospring.projetoSpring.filter;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.projetospring.projetoSpring.user.IUserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -12,12 +13,17 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Base64;
 
+@Component
 public class FilterAuth extends OncePerRequestFilter {
+
+    @Autowired
     IUserRepository userRepository;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
     var authorization = request.getHeader("Authorization");
+    filterChain.doFilter(request,response);
     System.out.println(authorization);
     System.out.println("Authorization");
 
@@ -41,7 +47,7 @@ public class FilterAuth extends OncePerRequestFilter {
         if(user==null){
             response.sendError(401,"Nao funciona, Usuario inexistente");
         }else {
-            var senhaverifica= BCrypt.verifyer().verify(senha.toCharArray(),user.getSenha());
+            var senhaverifica= BCrypt.verifyer().verify(password.toCharArray(),user.getPassword());
                 if (senhaverifica.verified){
                     filterChain.doFilter(request,response);
                 }else {
