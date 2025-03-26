@@ -12,12 +12,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Base64;
 
-@Component
 public class FilterAuth extends OncePerRequestFilter {
-
-    @Autowired
     IUserRepository userRepository;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
@@ -42,10 +38,15 @@ public class FilterAuth extends OncePerRequestFilter {
 
     //VALIDAÇÃO DE USUARIO
         var user = this.userRepository.findByname(username);
-        if (user == null) {
-            response.sendError(401, "Usuário não encontrado!");
+        if(user==null){
+            response.sendError(401,"Nao funciona, Usuario inexistente");
         }else {
-            response.sendError(401);
-            }
+            var senhaverifica= BCrypt.verifyer().verify(senha.toCharArray(),user.getSenha());
+                if (senhaverifica.verified){
+                    filterChain.doFilter(request,response);
+                }else {
+                        response.sendError(401,"Senha Incorreta");
+                }
         }
     }
+}
