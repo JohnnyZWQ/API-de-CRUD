@@ -20,39 +20,46 @@ public class FilterAuth extends OncePerRequestFilter {
     IUserRepository userRepository;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
-    var authorization = request.getHeader("Authorization");
-    filterChain.doFilter(request,response);
-    System.out.println(authorization);
-    System.out.println("Authorization");
+        var serveletpath = request.getServletPath();
+        if(serveletpath.equals("/jogo/novo")) {
+            var authorization = request.getHeader("Authorization");
+            filterChain.doFilter(request,response);
+            System.out.println(authorization);
+            System.out.println("Authorization");
 
-    var authEncode = authorization.substring("Basic".length()).trim();
-    System.out.println("Authorization");
-    System.out.println(authEncode);
+            var authEncode = authorization.substring("Basic".length()).trim();
+            System.out.println("Authorization");
+            System.out.println(authEncode);
 
-    byte[] authDecode = Base64.getDecoder().decode(authEncode);
-    System.out.println("Authorization");
-    System.out.println(authDecode);
+            byte[] authDecode = Base64.getDecoder().decode(authEncode);
+            System.out.println("Authorization");
+            System.out.println(authDecode);
 
-    var authString = new String(authDecode);
-    System.out.println(authString);
-    String[] credenciais = authString.split(":");
-    String username = credenciais[0];
-    String password = credenciais[1];
-    System.out.println("username: " + username + " password: " + password);
+            var authString = new String(authDecode);
+            System.out.println(authString);
+            String[] credenciais = authString.split(":");
+            String username = credenciais[0];
+            String password = credenciais[1];
+            System.out.println("username: " + username + " password: " + password);
 
-    //VALIDAÇÃO DE USUARIO
-        var user = this.userRepository.findByname(username);
-        if(user==null){
-            response.sendError(401,"Nao funciona, Usuario inexistente");
-        }else {
-            var senhaverifica= BCrypt.verifyer().verify(password.toCharArray(),user.getPassword());
+            //VALIDAÇÃO DE USUARIO
+            var user = this.userRepository.findByname(username);
+            if(user==null){
+                response.sendError(401,"Nao funciona, Usuario inexistente");
+            }else {
+                var senhaverifica= BCrypt.verifyer().verify(password.toCharArray(),user.getPassword());
                 if (senhaverifica.verified){
+                    request.setAttribute("id", user.getId());
                     filterChain.doFilter(request,response);
                 }else {
-                        response.sendError(401,"Senha Incorreta");
+                    response.sendError(401,"Senha Incorreta");
                 }
+            }
+        } else {
+            filterChain.doFilter(request,response);
         }
     }
 }

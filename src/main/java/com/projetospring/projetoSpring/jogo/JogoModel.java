@@ -11,10 +11,12 @@ public class JogoModel {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    private UUID id;
+    private UUID idJogo;
     private String nome;
     private String senha;
     private String genero;
+
+    private UUID id;
 
     public String getSenha() {
         return senha;
@@ -32,6 +34,15 @@ public class JogoModel {
         this.nome = nome;
     }
 
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -40,11 +51,11 @@ public class JogoModel {
         this.id = id;
     }
 
-    public String getGenero() {
-        return genero;
+    public UUID getIdJogo() {
+        return idJogo;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setIdJogo(UUID idJogo) {
+        this.idJogo = idJogo;
     }
 }

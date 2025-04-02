@@ -7,6 +7,7 @@
     <list default="true" id="089187ad-0238-49ae-ae58-8a1408d25837" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/projetospring/projetoSpring/filter/FilterAuth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projetospring/projetoSpring/filter/FilterAuth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/projetospring/projetoSpring/jogo/JogoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projetospring/projetoSpring/jogo/JogoModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +102,7 @@
       <workItem from="1741781102185" duration="5850000" />
       <workItem from="1741951796508" duration="3633000" />
       <workItem from="1742556309802" duration="5715000" />
+      <workItem from="1743594371262" duration="5003000" />
     </task>
     <servers />
   </component>
