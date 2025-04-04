@@ -1,0 +1,79 @@
+1. O que é a anotação `@SpringBootApplication`?  
+É uma combinação de `@Configuration`, `@EnableAutoConfiguration` e `@ComponentScan`. 
+Diz ao Spring para configurar a aplicação automaticamente.
+
+2. Para que serve o método `main()` na classe principal?  
+Inicia a aplicação com `SpringApplication.run()`.
+
+3. Para que serve a anotação `@Entity`?  
+Marca uma classe como uma entidade que será mapeada para uma tabela no banco.
+
+4. O que significa `@GeneratedValue(generator = "UUID")`?  
+Gera automaticamente um ID único do tipo UUID para o campo anotado com `@Id`.
+
+5. O que é o `UserModel` e o `JogoModel`?  
+São entidades JPA que representam as tabelas `tb_usuario` e `tb_jogos`.
+
+6. O que é `JpaRepository`?  
+É uma interface do Spring Data que fornece métodos prontos para acessar o banco, como `findAll()`, `save()`, `deleteById()`.
+
+7. O que faz o método `findByname(String name)`?  
+Busca um usuário pelo nome, usando uma consulta personalizada baseada no nome do campo.
+
+8. Para que serve a anotação `@RestController`?  
+Transforma a classe em um controlador REST, retornando os dados no formato JSON.
+
+9. Qual a diferença entre `@PostMapping`, `@GetMapping`, `@PutMapping` e `@DeleteMapping`?  
+- `@PostMapping`: Envia dados para criação (POST)
+- `@GetMapping`: Busca informações (GET)
+- `@PutMapping`: Atualização (PUT)
+- `@DeleteMapping`: Exclusão (DELETE)
+
+10. O que é o BCrypt?  
+É uma biblioteca para criptografar senhas com segurança.
+
+11. O que faz a classe `FilterAuth`?  
+Intercepta requisições no endpoint definido e verifica se o usuário está autenticado via cabeçalho `Authorization`.
+
+12.O que significa HttpStatus.OK (200)?
+
+🔹 200 OK = Requisição bem-sucedida
+
+13. O que significa `HttpStatus.BAD_REQUEST` (400)?  
+Erro na requisição, como quando o usuário já existe.
+
+14. O que significa `response.sendError(401, ...)`?  
+Rejeita a requisição por falha na autenticação (usuário ou senha incorreta).  
+
+15. O que é o H2 Database?  
+O H2 é um banco de dados em memória usado para testes em aplicações Spring Boot.  
+
+16. O que é JPA?  
+JPA (Java Persistence API) é uma especificação do Java para trabalhar com banco de dados usando objetos Java.
+
+17. O que é o Maven?  
+Maven é um gerenciador de dependências. 
+Ele usa um arquivo `pom.xml` para definir quais bibliotecas serão baixadas automaticamente.  
+
+18. O que o `HttpServletRequest` faz?  
+Ele contém informações da requisição HTTP, como headers, corpo e parâmetros.  
+
+19. O que o `HttpServletResponse` faz?  
+Ele representa a resposta do servidor, permitindo definir status HTTP, headers e corpo da resposta.  
+
+20. O que o `BCrypt` faz?  
+BCrypt é um algoritmo para criptografar senhas de forma segura.
+
+POSTMAN
+
+21. O que é o Postman e para que ele é utilizado?  
+O Postman é uma ferramenta usada para testar APIs REST, 
+permitindo enviar requisições HTTP (GET, POST, PUT, DELETE) e visualizar as respostas.  
+
+22. Como enviar um corpo (`body`) em uma requisição POST no Postman?  
+
+{
+  "name": "João",
+  "email": "joao@email.com",
+  "password": "123456"
+}
